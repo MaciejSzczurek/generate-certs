@@ -1,4 +1,4 @@
-docker==6.1.1
+docker==6.1.2
 dns-lexicon==3.11.7
 ovh==1.1.0
 certbot==2.6.0
