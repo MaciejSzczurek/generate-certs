@@ -55,6 +55,7 @@ class Arguments(Tap):
     keycloak_path: Optional[str] = None
     regenerate_tlsa: bool = False
     without_rsa: bool = False
+    owner_id: Optional[int] = None
 
     def configure(self) -> None:
         self.add_argument("options", help="dns-lexicon options file")
@@ -126,6 +127,9 @@ class Arguments(Tap):
             default=False,
             type=bool,
             help="Don't create rsa certificates",
+        )
+        self.add_argument(
+            "--owner-id", default=None, type=int, help="Owner UID for certificate file"
         )
 
 
@@ -318,6 +322,9 @@ def main() -> int:
             move(ZERO_CERT_PEM, CERT_PEM)
             move("0000_chain.pem", CHAIN_PEM)
             move("0001_chain.pem", FULL_CHAIN_PEM)
+            if args.owner_id:
+                for file in {CERT_PEM, CHAIN_PEM, FULL_CHAIN_PEM, KEY_PEM}:
+                    chown(file, args.owner_id)
         else:
             remove(NEW_KEY_PEM)
             remove(NEW_REQ_PEM)
@@ -356,6 +363,9 @@ def main() -> int:
                 move(ZERO_CERT_PEM, CERT_RSA_PEM)
                 move("0000_chain.pem", CHAIN_RSA_PEM)
                 move("0001_chain.pem", FULL_CHAIN_RSA_PEM)
+                if args.owner_id:
+                    for file in {CERT_RSA_PEM, CHAIN_RSA_PEM, FULL_CHAIN_RSA_PEM, KEY_RSA_PEM}:
+                        chown(file, args.owner_id)
             else:
                 remove(NEW_KEY_RSA_PEM)
                 remove(NEW_REQ_RSA_PEM)
