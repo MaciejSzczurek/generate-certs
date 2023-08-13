@@ -22,7 +22,7 @@ from docker import DockerClient
 from docker.errors import NotFound
 from docker.models.containers import Container
 from lexicon.config import ConfigResolver
-from lexicon.providers.base import Provider
+from lexicon.interfaces import Provider
 from tap import Tap
 
 FULL_CHAIN_RSA_PEM: Final = "full_chain-rsa.pem"
@@ -153,7 +153,7 @@ def create_dns_client() -> Provider:
 
     provider_class: Type[Provider] = getattr(
         importlib.import_module(
-            f"lexicon.providers.{config_resolver.resolve('provider_name')}"
+            f"lexicon._private.providers.{config_resolver.resolve('provider_name')}"
         ),
         "Provider",
     )
