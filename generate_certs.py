@@ -2,7 +2,7 @@
 
 import importlib
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from os import remove, rename, chmod, path
 from os.path import exists
 from shutil import copy, chown
@@ -259,9 +259,9 @@ def main() -> int:
         with open(FULL_CHAIN_PEM, "rb") as file:
             valid_until = x509.load_pem_x509_certificate(
                 file.read(), default_backend()
-            ).not_valid_after - timedelta(days=args.days)
+            ).not_valid_after_utc - timedelta(days=args.days)
     else:
-        valid_until = datetime.now() - timedelta(days=1)
+        valid_until = datetime.now(timezone.utc) - timedelta(days=1)
 
     if args.regenerate_tlsa:
         try:
@@ -283,7 +283,7 @@ def main() -> int:
         move("key-rsa.old.pem", KEY_RSA_PEM)
         return 0
 
-    if valid_until <= datetime.now():
+    if valid_until <= datetime.now(timezone.utc):
         try:
             check_mailcow()
         except MailcowException as exception:
