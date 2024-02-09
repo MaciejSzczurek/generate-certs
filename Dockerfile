@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 
-ENV CERTBOT_DNS_LEXICON_PLUGIN_VERSION=1.0.31
+ENV CERTBOT_DNS_LEXICON_PLUGIN_VERSION=1.0.32
 
 COPY generate_certs.py /usr/local/bin/generate-certs
 COPY generate_ovh_key.py /usr/local/bin/generate-ovh-key
