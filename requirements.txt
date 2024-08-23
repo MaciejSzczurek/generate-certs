@@ -1,5 +1,5 @@
 docker==7.1.0
-dns-lexicon==3.17.0
+dns-lexicon==3.18.0
 ovh==1.2.0
 certbot==2.11.0
 cryptography==43.0.0
