@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 ENV CERTBOT_DNS_LEXICON_PLUGIN_VERSION=1.0.38
 
