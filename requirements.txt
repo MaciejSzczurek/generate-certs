@@ -1,7 +1,7 @@
 docker==7.1.0
 dns-lexicon==3.21.1
 ovh==1.2.0
-certbot==4.1.0
+certbot==4.1.1
 cryptography==45.0.4
 PyYAML==6.0.2
 typed-argument-parser==1.10.1
