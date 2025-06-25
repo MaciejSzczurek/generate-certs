@@ -56,6 +56,7 @@ class Arguments(Tap):
     regenerate_tlsa: bool = False
     without_rsa: bool = False
     owner_id: Optional[int] = None
+    generate_tlsa: bool = True
 
     def configure(self) -> None:
         self.add_argument("options", help="dns-lexicon options file")
@@ -130,6 +131,9 @@ class Arguments(Tap):
         )
         self.add_argument(
             "--owner-id", default=None, type=int, help="Owner UID for certificate file"
+        )
+        self.add_argument(
+            "--generate-tlsa", default=True, type=bool, help="Generate DNS TLSA entries"
         )
 
 
@@ -396,7 +400,8 @@ def main() -> int:
                         path.join(args.mailcow_path, "data/assets/ssl/chain.pem"),
                     )
 
-                    generate_tlsa()
+                    if args.generate_tlsa:
+                        generate_tlsa()
 
                 mailcow_containers: List[Tuple[str, str]] = [
                     ("postfix-mailcow", "postfix reload"),
