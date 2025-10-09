@@ -3,5 +3,5 @@ dns-lexicon==3.21.1
 ovh==1.2.0
 certbot==5.1.0
 cryptography==46.0.2
-PyYAML==6.0.2
+PyYAML==6.0.3
 typed-argument-parser==1.11.0
