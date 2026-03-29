@@ -4,4 +4,4 @@ ovh==1.2.0
 certbot==5.4.0
 cryptography==46.0.6
 PyYAML==6.0.3
-typed-argument-parser==1.11.0
+typed-argument-parser==1.12.0
